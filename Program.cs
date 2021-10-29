@@ -69,8 +69,14 @@ namespace Address_Book
         {
             Contact obj = new Contact();
 
-            AddContact();
-
+            Console.Write("how many new contacts you wants to add :");
+            int N = Convert.ToInt32(Console.ReadLine());
+            while (N > 0)
+            {
+                Console.WriteLine("Enter the Contact details :-");
+                AddContact();
+                N--;
+            }
             PrintPerson(Address_book[0]);
 
         }
