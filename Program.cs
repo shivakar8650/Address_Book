@@ -45,7 +45,8 @@ namespace Address_Book
 
             Console.Write("Enter the Email: ");
             contact.Email = Console.ReadLine();
-            Address_book.Add(contact);
+             Address_book.Add(contact);
+
         }
 
        
@@ -61,7 +62,8 @@ namespace Address_Book
             Console.WriteLine("State : " + contact.State);
             Console.WriteLine("Zip : " + contact.Zip);
             Console.WriteLine("PhoneNumber : " + contact.PhoneNumber);
-            Console.WriteLine("Email : " + contact.Email);
+            Console.WriteLine("Email : " + contact.Email);*/
+            Console.WriteLine("--------------------------------------------");
 
         }
 
