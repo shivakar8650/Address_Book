@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
 namespace Address_Book
 {
     class Program
     {
-        public static int check_update = 0;
         public class Contact
         {
             public string FirstName { get; set; }
@@ -19,13 +16,11 @@ namespace Address_Book
             public long PhoneNumber { get; set; }
 
             public string Email { get; set; }
-
-           
         }
 
-        private static void AddContact(Contact contact)
+        private static void AddContact()
         {
-           // Contact contact = new Contact();
+            Contact contact = new Contact();
 
             Console.Write("Enter First Name : ");
             contact.FirstName = Console.ReadLine();
@@ -33,7 +28,6 @@ namespace Address_Book
             Console.Write("Enter Last Name : ");
             contact.LastName = Console.ReadLine();
 
-            
             Console.Write("Enter Address : ");
             contact.Address = Console.ReadLine();
 
@@ -51,25 +45,10 @@ namespace Address_Book
 
             Console.Write("Enter the Email: ");
             contact.Email = Console.ReadLine();
-            Console.WriteLine("--------------------------------------------");
-          
-            if(check_update==0)
-                Address_book.Add(contact);
+            Address_book.Add(contact);
         }
 
-        private static void update()
-        {
-            Console.Write("For update Enter the Person name:");
-            string Input =Console.ReadLine();
-            check_update = 1;
-           Contact person = Address_book.FirstOrDefault(x => x.FirstName.ToLower() == Input.ToLower());
-            AddContact(person);
-           
-            Console.WriteLine("The entered details are :");
-            PrintPerson(person);
-
-         
-        }
+       
 
         private static void PrintPerson(Contact contact)
         {
@@ -83,31 +62,24 @@ namespace Address_Book
             Console.WriteLine("Zip : " + contact.Zip);
             Console.WriteLine("PhoneNumber : " + contact.PhoneNumber);
             Console.WriteLine("Email : " + contact.Email);
-            Console.WriteLine("--------------------------------------------");
+
         }
 
         public static List<Contact> Address_book = new List<Contact>();
         static void Main(string[] args)
         {
-           
+            Contact obj = new Contact();
 
             Console.Write("how many new contacts you wants to add :");
             int N = Convert.ToInt32(Console.ReadLine());
             while (N > 0)
             {
-                Contact person = new Contact();
                 Console.WriteLine("Enter the Contact details :-");
-                AddContact(person);
+                AddContact();
                 N--;
             }
-         
-            update();
+            PrintPerson(Address_book[0]);
 
-            Console.WriteLine("All contact are :-");
-            foreach (var print in Address_book)
-            {
-                PrintPerson(print);
-            }
         }
     }
 }
