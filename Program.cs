@@ -57,7 +57,7 @@ namespace Address_Book
                 Address_book.Add(contact);
         }
 
-        private static void update()
+        private static void Update()
         {
             Console.Write("For update Enter the Person name:");
             string Input = Console.ReadLine();
@@ -101,7 +101,7 @@ namespace Address_Book
                 N--;
             }
 
-            update();
+            Update();
 
             Console.WriteLine("All contact are :-");
             foreach (var print in Address_book)
