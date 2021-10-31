@@ -6,7 +6,6 @@ namespace Address_Book
 {
     class Program
     { public static void check_update=0;
-        public static int check_update = 0;
         public class Contact
         {
             public string FirstName { get; set; }
