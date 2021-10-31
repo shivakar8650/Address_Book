@@ -6,6 +6,7 @@ namespace Address_Book
 {
     class Program
     { public static int check_update = 0;
+     
         public class Contact
         {
             public string FirstName { get; set; }
@@ -24,36 +25,46 @@ namespace Address_Book
 
         private static void AddContact(Contact contact)
         {
-            // Contact contact = new Contact();
+            
 
             Console.Write("Enter First Name : ");
-            contact.FirstName = Console.ReadLine();
+            string FirstName = Console.ReadLine();
+            if (Address_book.ContainsKey(FirstName))
+            {
+                Console.WriteLine("Person Name is not valid please enter unique name");
+                
+            }
+            else
+            {
 
-            Console.Write("Enter Last Name : ");
-            contact.LastName = Console.ReadLine();
+                contact.FirstName = FirstName;
+
+                Console.Write("Enter Last Name : ");
+                contact.LastName = Console.ReadLine();
 
 
-            Console.Write("Enter Address : ");
-            contact.Address = Console.ReadLine();
+                Console.Write("Enter Address : ");
+                contact.Address = Console.ReadLine();
 
-            Console.Write("Enter City : ");
-            contact.City = Console.ReadLine();
+                Console.Write("Enter City : ");
+                contact.City = Console.ReadLine();
 
-            Console.Write("Enter State : ");
-            contact.State = Console.ReadLine();
+                Console.Write("Enter State : ");
+                contact.State = Console.ReadLine();
 
-            Console.Write("Enter Zip code : ");
-            contact.Zip = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter Zip code : ");
+                contact.Zip = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Enter Phone Number : ");
-            contact.PhoneNumber = Convert.ToInt64(Console.ReadLine());
+                Console.Write("Enter Phone Number : ");
+                contact.PhoneNumber = Convert.ToInt64(Console.ReadLine());
 
-            Console.Write("Enter the Email: ");
-            contact.Email = Console.ReadLine();
-            Console.WriteLine("--------------------------------------------");
+                Console.Write("Enter the Email: ");
+                contact.Email = Console.ReadLine();
+                Console.WriteLine("--------------------------------------------");
 
-            if (check_update == 0)
-                Address_book.Add(contact);
+                if (check_update == 0)
+                    Address_book.Add(contact.FirstName, contact);
+            } 
         }
 
         private static void Update()
@@ -61,11 +72,14 @@ namespace Address_Book
             Console.Write("For update Enter the Person name:");
             string Input = Console.ReadLine();
             check_update = 1;
-            Contact person = Address_book.FirstOrDefault(x => x.FirstName.ToLower() == Input.ToLower());
-            if(person != null)
-                AddContact(person);
+            if (Address_book.ContainsKey(Input))
+            {
+              AddContact((Contact)Address_book[Input]);
+            }
             else
+            {
                 Console.WriteLine("Record not found!");
+            }
 
             
         }
@@ -74,11 +88,16 @@ namespace Address_Book
         {
             Console.Write("Enter the Person name You want to Remove:");
             string Input = Console.ReadLine();
-            Contact person = Address_book.FirstOrDefault(x => x.FirstName.ToLower() == Input.ToLower());
-            if (person != null)
-                Address_book.Remove(person);
+            if (Address_book.ContainsKey(Input))
+            {
+                Address_book.Remove(Input);
+                Console.WriteLine("Remove Successfully!");
+            }
             else
+            {
                 Console.WriteLine("Record not found!");
+            }
+         
         }
 
         private static void PrintPerson(Contact contact)
@@ -95,14 +114,14 @@ namespace Address_Book
             Console.WriteLine("Email : " + contact.Email);
             Console.WriteLine("--------------------------------------------");
         }
-
-        public static List<Contact> Address_book = new List<Contact>();
+        public static Dictionary<string, object> Address_book = new Dictionary<string, object>();
+       
         static void Main(string[] args)
         {
             char input = 'Y';
             while (input != 'N')
             {
-
+                check_update = 0;
                 Console.Write("Choose the Any one Option : \n 1.for Add : \n 2.for Update :\n 3.for Remove :\n 4.for Print : \n Enter the choice:");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
@@ -128,7 +147,8 @@ namespace Address_Book
                     Console.WriteLine("All contact are :-");
                     foreach (var print in Address_book)
                     {
-                        PrintPerson(print);
+                  
+                             PrintPerson((Contact)print.Value);
                     }
                     break;
                 default:
@@ -139,7 +159,7 @@ namespace Address_Book
 
             Console.Write("For Continue/Quit press (Y/N) \n Enter the Key:");
             input = Convert.ToChar(Console.ReadLine());
-
+             
             } 
             
 
