@@ -5,7 +5,7 @@ using System.Linq;
 namespace Address_Book
 {
     class Program
-    { public static void check_update=0;
+    { public static int check_update = 0;
         public class Contact
         {
             public string FirstName { get; set; }
@@ -36,7 +36,7 @@ namespace Address_Book
             Console.Write("Enter Address : ");
             contact.Address = Console.ReadLine();
 
-            Console.Write("Enter City : ");
+           /* Console.Write("Enter City : ");
             contact.City = Console.ReadLine();
 
             Console.Write("Enter State : ");
@@ -49,7 +49,7 @@ namespace Address_Book
             contact.PhoneNumber = Convert.ToInt64(Console.ReadLine());
 
             Console.Write("Enter the Email: ");
-            contact.Email = Console.ReadLine();
+            contact.Email = Console.ReadLine();*/
             Console.WriteLine("--------------------------------------------");
 
             if (check_update == 0)
@@ -62,12 +62,23 @@ namespace Address_Book
             string Input = Console.ReadLine();
             check_update = 1;
             Contact person = Address_book.FirstOrDefault(x => x.FirstName.ToLower() == Input.ToLower());
-            AddContact(person);
+            if(person != null)
+                AddContact(person);
+            else
+                Console.WriteLine("Record not found!");
 
-            Console.WriteLine("The entered details are :");
-            PrintPerson(person);
+            
+        }
 
-
+        private static void Remove()
+        {
+            Console.Write("Enter the Person name You want to Remove:");
+            string Input = Console.ReadLine();
+            Contact person = Address_book.FirstOrDefault(x => x.FirstName.ToLower() == Input.ToLower());
+            if (person != null)
+                Address_book.Remove(person);
+            else
+                Console.WriteLine("Record not found!");
         }
 
         private static void PrintPerson(Contact contact)
@@ -77,36 +88,62 @@ namespace Address_Book
             Console.WriteLine("First Name: " + contact.FirstName);
             Console.WriteLine("Last Name: " + contact.LastName);
             Console.WriteLine("Address : " + contact.Address);
-            Console.WriteLine("City : " + contact.City);
+           /* Console.WriteLine("City : " + contact.City);
             Console.WriteLine("State : " + contact.State);
             Console.WriteLine("Zip : " + contact.Zip);
             Console.WriteLine("PhoneNumber : " + contact.PhoneNumber);
-            Console.WriteLine("Email : " + contact.Email);
+            Console.WriteLine("Email : " + contact.Email);*/
             Console.WriteLine("--------------------------------------------");
         }
 
         public static List<Contact> Address_book = new List<Contact>();
         static void Main(string[] args)
         {
-
-
-            Console.Write("how many new contacts you wants to add :");
-            int N = Convert.ToInt32(Console.ReadLine());
-            while (N > 0)
+            char input = 'Y';
+            while (input != 'N')
             {
-                Contact person = new Contact();
-                Console.WriteLine("Enter the Contact details :-");
-                AddContact(person);
-                N--;
+
+                Console.Write("Choose the Any one Option : \n 1.for Add : \n 2.for Update :\n 3.for Remove :\n 4.for Print : \n Enter the choice:");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("how many new contacts you wants to add :");
+                    int N = Convert.ToInt32(Console.ReadLine());
+                    while (N > 0)
+                    {
+                        Contact person = new Contact();
+                        Console.WriteLine("Enter the Contact details :-");
+                        AddContact(person);
+                        N--;
+                    }
+                    break;
+                case 2:
+                    Update();
+                    break;
+                case 3:
+                    Remove();
+                    break;
+                case 4:
+                    Console.WriteLine("All contact are :-");
+                    foreach (var print in Address_book)
+                    {
+                        PrintPerson(print);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("invalid input! enter again:");
+                    break;
+
             }
 
-            Update();
+            Console.Write("For Continue/Quit press (Y/N) \n Enter the Key:");
+            input = Convert.ToChar(Console.ReadLine());
 
-            Console.WriteLine("All contact are :-");
-            foreach (var print in Address_book)
-            {
-                PrintPerson(print);
-            }
+            } 
+            
+
+            
         }
     }
 }
