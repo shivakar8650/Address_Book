@@ -36,7 +36,7 @@ namespace Address_Book
             Console.Write("Enter Address : ");
             contact.Address = Console.ReadLine();
 
-           /* Console.Write("Enter City : ");
+            Console.Write("Enter City : ");
             contact.City = Console.ReadLine();
 
             Console.Write("Enter State : ");
@@ -49,7 +49,7 @@ namespace Address_Book
             contact.PhoneNumber = Convert.ToInt64(Console.ReadLine());
 
             Console.Write("Enter the Email: ");
-            contact.Email = Console.ReadLine();*/
+            contact.Email = Console.ReadLine();
             Console.WriteLine("--------------------------------------------");
 
             if (check_update == 0)
@@ -88,11 +88,11 @@ namespace Address_Book
             Console.WriteLine("First Name: " + contact.FirstName);
             Console.WriteLine("Last Name: " + contact.LastName);
             Console.WriteLine("Address : " + contact.Address);
-           /* Console.WriteLine("City : " + contact.City);
+            Console.WriteLine("City : " + contact.City);
             Console.WriteLine("State : " + contact.State);
             Console.WriteLine("Zip : " + contact.Zip);
             Console.WriteLine("PhoneNumber : " + contact.PhoneNumber);
-            Console.WriteLine("Email : " + contact.Email);*/
+            Console.WriteLine("Email : " + contact.Email);
             Console.WriteLine("--------------------------------------------");
         }
 
