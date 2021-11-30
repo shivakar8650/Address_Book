@@ -34,7 +34,7 @@ namespace Address_Book
             char input = 'Y';
             while (input != 'N')
             {
-                Console.Write("Choose the Any one Option : \n 1.for Add : \n 2.for Update :\n 3.for Remove :\n 4.for Print : \n 5.add new addressBook : \n 6.switch to other addressbook : \n Enter the choice:");
+                Console.Write("Choose the Any one Option : \n 1.for Add : \n 2.for Update :\n 3.for Remove :\n 4.for Print : \n 5.add new addressBook : \n 6.switch to other addressbook : \n 7. search the person by state or city name : \n Enter the choice:");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -81,8 +81,11 @@ namespace Address_Book
                      
                         }
                         break;
+                    case 7:
+                        AddressBookOperaton.search_person();
+                        break;
                     default:
-                        Console.WriteLine("invalid input! enter again:");
+                        Console.WriteLine("invalid input, enter again!");
                         break;
 
                 }
