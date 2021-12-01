@@ -146,11 +146,13 @@ namespace Address_Book
             {
                 Console.WriteLine("{0}", contact.FirstName);
             }
+            Console.WriteLine($"total count person in {cityname} is : {cityPersons[cityname].Count}");
             Console.WriteLine("--------------------Persons in {0} state", statename);
             foreach (Contact contact in statePersons[statename])
             {
                 Console.WriteLine("{0}", contact.FirstName);
             }
+            Console.WriteLine($"total count person in {statename} is : {statePersons[statename].Count}");
         }
         public static Dictionary<string, Dictionary<string, object>> Return_AddressBook()
         {
