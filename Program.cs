@@ -80,6 +80,7 @@ namespace Address_Book
                             AdderssBookname = Console.ReadLine();
                      
                         }
+                        Console.WriteLine("switc successfully");
                         break;
                     case 7:
                         AddressBookOperaton.search_person();
