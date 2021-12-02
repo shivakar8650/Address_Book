@@ -141,18 +141,71 @@ namespace Address_Book
 
         public static void PersonSearchDisplay(Dictionary<string, List<Contact>> cityPersons, Dictionary<string, List<Contact>> statePersons, string cityname, string statename)
         {
-            Console.WriteLine("------------------- Persons in {0} city-------------------------", cityname);
+            Console.WriteLine($" Persons in {cityname} city------------------");
             foreach (Contact contact in cityPersons[cityname])
             {
-                Console.WriteLine("{0}", contact.FirstName);
+                Console.WriteLine(" " + contact.FirstName);
             }
             Console.WriteLine($"total count person in {cityname} is : {cityPersons[cityname].Count}");
-            Console.WriteLine("--------------------Persons in {0} state", statename);
+            Console.WriteLine($"Persons in {statename } state---------------");
             foreach (Contact contact in statePersons[statename])
             {
-                Console.WriteLine("{0}", contact.FirstName);
+                Console.WriteLine("  "+contact.FirstName);
             }
             Console.WriteLine($"total count person in {statename} is : {statePersons[statename].Count}");
+        }
+
+        public static void GetTheListofAddressBoks()
+        {
+          /*  Console.WriteLine("Enter Name Of AddressBook From Below List");*/
+            Dictionary<string, Dictionary<string, object>> getAddressBook = AddressBookOperaton.Return_AddressBook();
+            foreach (var books in getAddressBook)
+            {
+                Console.WriteLine(books.Key);
+            }
+           
+          
+        }
+        public static string SwitchToDifferentAddressbook()
+        {
+
+            Console.WriteLine("Enter Name Of AddressBook From Below List");
+            Dictionary<string, Dictionary<string, object>> getAddressBook = AddressBookOperaton.Return_AddressBook();
+            foreach (var books in getAddressBook)
+            {
+                Console.WriteLine(books.Key);
+            }
+            string AdderssBookname = Console.ReadLine();
+            while (!getAddressBook.ContainsKey(AdderssBookname))
+            {
+                Console.WriteLine("No such AddressBook found. Try Again.");
+                AdderssBookname = Console.ReadLine();
+
+            }
+            Console.WriteLine("switc successfully");
+
+            return AdderssBookname;
+        }
+        public static void SortAddressBook()
+        {
+            IList<object> sortedList = new List<object>();
+            Console.WriteLine("Enter the addressbook name that you want to sort :");
+            GetTheListofAddressBoks();
+            string addressBookName = Console.ReadLine();
+            foreach ( var element in AddressBook[addressBookName].OrderBy(key => key.Key))
+            {
+               // Console.WriteLine(element.Key);
+                sortedList.Add(element.Value);
+              
+            }
+            AddressBook[addressBookName].Clear();
+            foreach (Contact element in sortedList)
+            {
+                AddressBook[addressBookName].Add(element.FirstName, element);
+
+            }
+            PrintPerson(addressBookName);
+
         }
         public static Dictionary<string, Dictionary<string, object>> Return_AddressBook()
         {
